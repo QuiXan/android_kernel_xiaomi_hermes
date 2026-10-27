@@ -492,8 +492,8 @@ INT32 wmt_dev_patch_get(PUINT8 pPatchName, osal_firmware **ppPatch, INT32 padSzB
 {
 	INT32 iRet = -1;
 	osal_firmware *pfw;
-	uid_t orig_uid;
-	gid_t orig_gid;
+	kuid_t orig_uid;
+	kgid_t orig_gid;
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29))
 	/* struct cred *cred = get_task_cred(current); */
@@ -525,11 +525,13 @@ INT32 wmt_dev_patch_get(PUINT8 pPatchName, osal_firmware **ppPatch, INT32 padSzB
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29))
 	orig_uid = cred->fsuid;
 	orig_gid = cred->fsgid;
-	cred->fsuid = cred->fsgid = 0;
+	cred->fsuid = GLOBAL_ROOT_UID;
+	cred->fsgid = GLOBAL_ROOT_GID;
 #else
-	orig_uid = current->fsuid;
-	orig_gid = current->fsgid;
-	current->fsuid = current->fsgid = 0;
+	orig_uid = make_kuid(&init_user_ns, current->fsuid);
+	orig_gid = make_kgid(&init_user_ns, current->fsgid);
+	current->fsuid = 0;
+	current->fsgid = 0;
 #endif
 
 	set_fs(get_ds());
@@ -542,8 +544,8 @@ INT32 wmt_dev_patch_get(PUINT8 pPatchName, osal_firmware **ppPatch, INT32 padSzB
 	cred->fsuid = orig_uid;
 	cred->fsgid = orig_gid;
 #else
-	current->fsuid = orig_uid;
-	current->fsgid = orig_gid;
+	current->fsuid = from_kuid(&init_user_ns, orig_uid);
+	current->fsgid = from_kgid(&init_user_ns, orig_gid);
 #endif
 
 	if (iRet > 0) {

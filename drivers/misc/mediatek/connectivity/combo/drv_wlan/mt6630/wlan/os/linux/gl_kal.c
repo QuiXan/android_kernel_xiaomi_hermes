@@ -837,6 +837,7 @@
 #include "gl_kal.h"
 #include "gl_wext.h"
 #include "precomp.h"
+#include <linux/uidgid.h>
 #if CFG_SUPPORT_AGPS_ASSIST
 #include <net/netlink.h>
 #endif
@@ -884,8 +885,8 @@ static UINT_32 pvIoBufferUsage;
 #if CFG_ENABLE_FW_DOWNLOAD
 
 static struct file *filp;
-static uid_t orgfsuid;
-static gid_t orgfsgid;
+static kuid_t orgfsuid;
+static kgid_t orgfsgid;
 static mm_segment_t orgfs;
 
 static PUINT_8 apucFwPath[] = {
@@ -954,7 +955,8 @@ WLAN_STATUS kalFirmwareOpen(IN P_GLUE_INFO_T prGlueInfo)
 	struct cred *cred = (struct cred *)get_current_cred();
 	orgfsuid = cred->fsuid;
 	orgfsgid = cred->fsgid;
-	cred->fsuid = cred->fsgid = 0;
+	cred->fsuid = GLOBAL_ROOT_UID;
+	cred->fsgid = GLOBAL_ROOT_GID;
 
 	ASSERT(prGlueInfo);
 

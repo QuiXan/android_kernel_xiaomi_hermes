@@ -717,7 +717,7 @@ static int __init tsbuck_init(void)
 		entry = proc_create("tzbuck",  S_IRUGO | S_IWUSR | S_IWGRP, tsbuck_dir, &tsbuck_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif

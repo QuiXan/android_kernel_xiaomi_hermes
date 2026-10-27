@@ -663,7 +663,7 @@ static int amddulthro_proc_register(void)
         entry = proc_create("tm_pid", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP, amddulthro_proc_dir, &amddulthro_pid_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -673,7 +673,7 @@ static int amddulthro_proc_register(void)
         entry = proc_create("amddulthro_param", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP, amddulthro_proc_dir, &amddulthro_param_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif

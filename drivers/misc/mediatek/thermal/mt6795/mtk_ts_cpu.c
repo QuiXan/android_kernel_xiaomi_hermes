@@ -5094,7 +5094,7 @@ static int __init tscpu_init(void)
 		entry = proc_create("tzcpu", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_fops);
 		if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5115,7 +5115,7 @@ static int __init tscpu_init(void)
         entry = proc_create("clatm_setting", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_dtm_setting_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5124,7 +5124,7 @@ static int __init tscpu_init(void)
         entry = proc_create("clatm_gpu_threshold", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_gpu_threshold_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5135,7 +5135,7 @@ static int __init tscpu_init(void)
 		entry = proc_create("tzcpu_fastpoll", S_IRUGO | S_IWUSR | S_IWGRP | S_IWGRP, mtktscpu_dir, &mtktscpu_fastpoll_fops);
 		if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5145,7 +5145,7 @@ static int __init tscpu_init(void)
 		entry = proc_create("tzcpu_Tj_out_via_HW_pin", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_Tj_out_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5155,7 +5155,7 @@ static int __init tscpu_init(void)
 		entry = proc_create("tzcpu_GPIO_out_monitor", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_GPIO_out_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5166,7 +5166,7 @@ static int __init tscpu_init(void)
 		entry = proc_create("clatm", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_atm_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5177,7 +5177,7 @@ static int __init tscpu_init(void)
         entry = proc_create("clthp", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_thp_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -5188,7 +5188,7 @@ static int __init tscpu_init(void)
         entry = proc_create("clctm", S_IRUGO | S_IWUSR | S_IWGRP, mtktscpu_dir, &mtktscpu_ctm_fops);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif

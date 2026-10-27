@@ -745,7 +745,7 @@ static int autok_module_init(void)
     //s_proc->write_proc = lte_autok_writeproc;
     //s_proc->read_proc = lte_autok_readproc;
     //s_proc->gid = 1000;
-    proc_set_user(s_proc, 0, 1000);
+    proc_set_user(s_proc, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
     
     KAL_RAWPRINT(("/proc/%s created\n", LTE_AUTOK_PROC_NAME));
     

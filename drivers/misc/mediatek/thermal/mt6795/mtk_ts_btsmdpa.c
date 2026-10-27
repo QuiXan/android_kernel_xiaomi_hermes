@@ -1111,7 +1111,7 @@ static int __init mtkts_btsmdpa_init(void)
 				&mtkts_btsmdpa_fops);
 		if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-			proc_set_user(entry, 0, 1000);
+			proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else				/* kernel ver */
 			entry->gid = 1000;
 #endif				/* kernel ver */
@@ -1122,7 +1122,7 @@ static int __init mtkts_btsmdpa_init(void)
 				&mtkts_btsmdpa_param_fops);
 		if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-			proc_set_user(entry, 0, 1000);
+			proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else				/* kernel ver */
 			entry->gid = 1000;
 #endif				/* kernel ver */

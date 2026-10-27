@@ -938,7 +938,7 @@ static long dev_char_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 			sig_info.si_signo = sig;
 			sig_info.si_code = SI_KERNEL;
 			sig_info.si_pid = current->pid;
-			sig_info.si_uid = current->cred->uid;
+			sig_info.si_uid = from_kuid_munged(&init_user_ns, current->cred->uid);
 			ret = kill_proc_info(SIGUSR2, &sig_info, pid);
 			CCCI_INF_MSG(md->index, CHAR, "send signal %d to rild %d ret=%ld\n", sig, pid, ret);
 		}

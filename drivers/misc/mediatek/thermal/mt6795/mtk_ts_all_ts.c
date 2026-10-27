@@ -1204,7 +1204,7 @@ static int __init tsallts_init(void)
         entry = proc_create("tzts1",  S_IRUGO | S_IWUSR | S_IWGRP, tsallts_dir, &tsallts_fops1);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -1213,7 +1213,7 @@ static int __init tsallts_init(void)
         entry = proc_create("tzts2",  S_IRUGO | S_IWUSR | S_IWGRP, tsallts_dir, &tsallts_fops2);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -1222,7 +1222,7 @@ static int __init tsallts_init(void)
         entry = proc_create("tzts3",  S_IRUGO | S_IWUSR | S_IWGRP, tsallts_dir, &tsallts_fops3);
         if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif
@@ -1231,7 +1231,7 @@ static int __init tsallts_init(void)
         entry = proc_create("tzts4",  S_IRUGO | S_IWUSR | S_IWGRP, tsallts_dir, &tsallts_fops4);
 		if (entry) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-            proc_set_user(entry, 0, 1000);
+            proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
             entry->gid = 1000;
 #endif

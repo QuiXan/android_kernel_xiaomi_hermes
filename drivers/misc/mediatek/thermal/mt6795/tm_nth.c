@@ -633,7 +633,7 @@ static int __init mtk_cooler_tm_nth_init(void)
         mtk_cooler_tm_nth_dprintk_always("[%s] driver/tm_nth creation failed\n", __func__);
     } else {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
-        proc_set_user(entry, 0, 1000);
+        proc_set_user(entry, GLOBAL_ROOT_UID, make_kgid(&init_user_ns, 1000));
 #else
         entry->gid = 1000;
 #endif
