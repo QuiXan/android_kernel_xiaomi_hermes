@@ -96,3 +96,8 @@ x509.genkey
 # building directory
 #
 /out/
+
+# build artifacts
+build_kernel.log
+scripts/basic/fixdep
+scripts/unifdef
